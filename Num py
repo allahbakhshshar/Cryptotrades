@@ -1,0 +1,24 @@
+import numpy as np
+import pandas as pd
+from strategies.base_strategy import BaseStrategy
+
+class MovingAverageStrategy(BaseStrategy):
+    def __init__(self, short_window=50, long_window=200):
+        self.short_window = short_window
+        self.long_window = long_window
+
+    def generate_signals(self, data: pd.DataFrame) -> pd.DataFrame:
+        """
+        Generate buy and sell signals based on moving average crossover
+        """
+        data['short_ma'] = data['close'].rolling(window=self.short_window, min_periods=1).mean()
+        data['long_ma'] = data['close'].rolling(window=self.long_window, min_periods=1).mean()
+
+        # Buy signal when short MA crosses above long MA
+        data['signal'] = 0
+        data.loc[data['short_ma'] > data['long_ma'], 'signal'] = 1
+
+        # Sell signal when short MA crosses below long MA
+        data.loc[data['short_ma'] < data['long_ma'], 'signal'] = -1
+
+        return data
