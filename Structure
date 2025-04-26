@@ -1,0 +1,31 @@
+crypto-futures-trading/
+│
+├── data/
+│   ├── historical_data/
+│   ├── live_data/
+│   └── data_processing.py
+│
+├── strategies/
+│   ├── base_strategy.py
+│   ├── moving_average_strategy.py
+│   └── rsi_strategy.py
+│
+├── broker/
+│   ├── exchange_api.py
+│   └── order_manager.py
+│
+├── risk_management/
+│   └── risk_control.py
+│
+├── tests/
+│   ├── test_data_processing.py
+│   ├── test_strategies.py
+│   └── test_risk_management.py
+│
+├── utils/
+│   ├── logger.py
+│   └── config.py
+│
+├── requirements.txt
+├── README.md
+└── main.py
